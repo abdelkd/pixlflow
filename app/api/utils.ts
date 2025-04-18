@@ -36,6 +36,7 @@ export const parseOptions = (optionsString: string) => {
     const [key, value, ..._] = opt.split('=')
 
     if (key === "format") {
+      // @ts-expect-error
       options["format"] = stringToFormat(value)
       continue
     }

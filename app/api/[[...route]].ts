@@ -1,19 +1,18 @@
-import { Hono } from 'hono'
-import { handle } from 'hono/vercel'
-import { parseOptions } from './utils'
-import { checkUserID, supabase } from './supabase'
+import { handle } from "@hono/node-server/vercel";
+import { Hono } from "hono";
+
 import sharp from 'sharp'
+import { isValidUserID, supabase } from "./supabase";
+import { parseOptions } from "./utils";
 
 export const runtime = 'nodejs'
 
 const app = new Hono().basePath('/api')
 const filenameRegex = /^(?!.*\.\.)[a-zA-Z0-9._-]+\.(?:jpg|png|avif|webp)$/
 
-app.get('/main', (c) => c.text('Main'))
-
 app.post('/image/:uploadId', async (c) => {
   const uploadId = c.req.param('uploadId')
-  if (!checkUserID(uploadId)) {
+  if (!isValidUserID(uploadId)) {
     return c.json({
       message: 'Invalid Upload ID'
     }, 400)
@@ -80,12 +79,18 @@ app.get('/image/:options/:filename', async (c) => {
 
   const fileBody = await res.arrayBuffer()
   const modifiedImageBuffer = await sharp(fileBody)
+    .jpeg({ quality: options.quality })
     .resize(options.width, options.height)
-    .toFormat(options.format, { quality: 10, nearLossless: true })
     .toBuffer()
   
-  return c.body(modifiedImageBuffer)
+  c.header("Content-Type", "image/jpeg")
+  return c.body(modifiedImageBuffer.buffer)
 })
 
-export const GET = handle(app)
-export const POST = handle(app)
+app.get('/hello', async (c) => {
+  return c.json({
+    message: 'Hello'
+  })
+})
+
+export default handle(app)

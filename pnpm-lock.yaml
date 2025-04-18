@@ -8,12 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@img/sharp-libvips-dev':
-        specifier: ^1.1.0
-        version: 1.1.0
-      '@img/sharp-wasm32':
-        specifier: ^0.34.1
-        version: 0.34.1
+      '@hono/node-server':
+        specifier: ^1.14.1
+        version: 1.14.1(hono@4.7.7)
       '@supabase/supabase-js':
         specifier: ^2.49.4
         version: 2.49.4
@@ -53,6 +50,12 @@ packages:
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
+
+  '@hono/node-server@1.14.1':
+    resolution: {integrity: sha512-vmbuM+HPinjWzPe7FFPWMMQMsbKE9gDPhaH0FFdqbGpkT5lp++tcWDTxwBl5EgS5y6JVgIaCdjeHRfQ4XRBRjQ==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: ^4
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -97,9 +100,6 @@ packages:
     resolution: {integrity: sha512-Xzc2ToEmHN+hfvsl9wja0RlnXEgpKNmftriQp6XzY/RaSfwD9th+MSh0WQKzUreLKKINb3afirxW7A0fz2YWuQ==}
     cpu: [x64]
     os: [darwin]
-
-  '@img/sharp-libvips-dev@1.1.0':
-    resolution: {integrity: sha512-KQFFEYuSrL2W9CdSc3VDaQ66aShDdH8lp3aq68C2F10SAm8rLAuICnTjJzD/NODCqO4uOPFztwSOpsXcFsdxqg==}
 
   '@img/sharp-libvips-linux-arm64@1.0.4':
     resolution: {integrity: sha512-9B+taZ8DlyyqzZQnoeIvDVR/2F4EbMepXMc/NdVbkzsJbzkUjhXv/70GQJ7tdLA4YJgNP25zukcxpX2/SueNrA==}
@@ -246,6 +246,7 @@ packages:
   '@img/sharp-wasm32@0.34.1':
     resolution: {integrity: sha512-YDybQnYrLQfEpzGOQe7OKcyLUCML4YOXl428gOOzBgN6Gw0rv8dpsJ7PqTHxBnXnwXr8S1mYFSLSa727tpz0xg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [wasm32]
 
   '@img/sharp-win32-ia32@0.33.5':
     resolution: {integrity: sha512-T36PblLaTwuVJ/zw/LaH0PdZkRz5rd3SmMHX8GSmR7vtNSP5Z6bQkExdSK7xGWyxLw4sUknBuugTelgw2faBbQ==}
@@ -535,6 +536,11 @@ snapshots:
   '@emnapi/runtime@1.4.3':
     dependencies:
       tslib: 2.8.1
+    optional: true
+
+  '@hono/node-server@1.14.1(hono@4.7.7)':
+    dependencies:
+      hono: 4.7.7
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
@@ -567,8 +573,6 @@ snapshots:
 
   '@img/sharp-libvips-darwin-x64@1.1.0':
     optional: true
-
-  '@img/sharp-libvips-dev@1.1.0': {}
 
   '@img/sharp-libvips-linux-arm64@1.0.4':
     optional: true
@@ -677,6 +681,7 @@ snapshots:
   '@img/sharp-wasm32@0.34.1':
     dependencies:
       '@emnapi/runtime': 1.4.3
+    optional: true
 
   '@img/sharp-win32-ia32@0.33.5':
     optional: true
