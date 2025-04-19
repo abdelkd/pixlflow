@@ -93,4 +93,5 @@ app.get('/hello', async (c) => {
   })
 })
 
-export default handle(app)
+export const GET = handle(app)
+export const POST = handle(app)
