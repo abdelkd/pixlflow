@@ -84,6 +84,7 @@ app.get('/image/:options/:filename', async (c) => {
     .toBuffer()
   
   c.header("Content-Type", "image/jpeg")
+  // @ts-expect-error
   return c.body(modifiedImageBuffer.buffer)
 })
 
